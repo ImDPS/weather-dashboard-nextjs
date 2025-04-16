@@ -1,0 +1,67 @@
+weather-dashboard/
+├── .env.local                # Environment variables
+├── .eslintrc.json            # ESLint configuration
+├── .gitignore                # Git ignore file
+├── next.config.js            # Next.js configuration
+├── package.json              # Project dependencies
+├── postcss.config.js         # PostCSS configuration for Tailwind
+├── README.md                 # Project documentation
+├── tailwind.config.ts        # Tailwind CSS configuration
+├── tsconfig.json             # TypeScript configuration
+└── src/                      # Source code
+    ├── app/                  # Next.js App Router structure
+    │   ├── api/              # API routes
+    │   │   └── weather/      # Weather-related API endpoints
+    │   │       └── route.ts  # API route handler
+    │   ├── dashboard/        # Dashboard page
+    │   │   ├── loading.tsx   # Loading state
+    │   │   ├── page.tsx      # Dashboard page component
+    │   │   └── layout.tsx    # Dashboard layout
+    │   ├── settings/         # Settings page
+    │   │   └── page.tsx      # Settings page component
+    │   ├── favicon.ico       # Favicon
+    │   ├── globals.css       # Global styles including Tailwind imports
+    │   ├── layout.tsx        # Root layout
+    │   └── page.tsx          # Home page
+    ├── components/           # Reusable components
+    │   ├── ui/               # Basic UI components
+    │   │   ├── Button.tsx    # Button component
+    │   │   ├── Card.tsx      # Card component
+    │   │   ├── Dropdown.tsx  # Dropdown component
+    │   │   ├── Input.tsx     # Input component
+    │   │   └── index.ts      # UI components exports
+    │   ├── layout/           # Layout components
+    │   │   ├── Header.tsx    # Header component
+    │   │   ├── Sidebar.tsx   # Sidebar component
+    │   │   ├── Footer.tsx    # Footer component
+    │   │   └── index.ts      # Layout components exports
+    │   ├── weather/          # Weather-specific components
+    │   │   ├── CurrentWeather.tsx     # Current weather display
+    │   │   ├── DailyForecast.tsx      # Daily forecast component
+    │   │   ├── HourlyForecast.tsx     # Hourly forecast component
+    │   │   ├── WeatherMap.tsx         # Weather map component
+    │   │   ├── TemperatureChart.tsx   # Temperature chart component
+    │   │   ├── PrecipitationChart.tsx # Precipitation chart component
+    │   │   ├── WeatherIcon.tsx        # Weather icon component
+    │   │   └── index.ts               # Weather components exports
+    │   └── dashboard/        # Dashboard-specific components
+    │       ├── WeatherSummary.tsx     # Weather summary component
+    │       ├── LocationSelector.tsx   # Location selector component
+    │       └── index.ts               # Dashboard components exports
+    ├── hooks/                # Custom React hooks
+    │   ├── useWeather.ts     # Weather data hook
+    │   └── useLocalStorage.ts # Local storage hook
+    ├── lib/                  # Utility libraries
+    │   ├── api.ts            # API client
+    │   └── utils.ts          # Helper functions
+    ├── styles/               # Custom styles beyond Tailwind
+    │   └── theme.ts          # Theme variables
+    ├── types/                # TypeScript type definitions
+    │   ├── weather.ts        # Weather-related types
+    │   └── index.ts          # Type exports
+    ├── constants/            # Constants and configuration
+    │   ├── config.ts         # App configuration
+    │   └── weather-icons.ts  # Weather icon mappings
+    └── mocks/                # Mock data for development
+        ├── weatherData.ts    # Mock weather data
+        └── locationData.ts   # Mock location data

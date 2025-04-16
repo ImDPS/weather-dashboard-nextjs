@@ -1,26 +1,218 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --radius: 1rem;
+    --radius-full: 9999px;
+    
+    /* Modern Background Gradients */
+    --gradient-blue: linear-gradient(135deg, #7AB2D8 0%, #4A6FA5 100%);
+    --gradient-warm: linear-gradient(135deg, #F9D77E 0%, #F7A37B 100%);
+    --gradient-cool: linear-gradient(135deg, #C2E0E8 0%, #85B9D3 100%);
+    --gradient-dark: linear-gradient(135deg, #2C3741 0%, #1C1C1C 100%);
+    
+    /* Base Colors */
+    --background: #FFFFFF;
+    --foreground: #1C1C1C;
+    
+    /* Primary Colors - More Vibrant */
+    --dark-blue: #2C3741;
+    --light-blue: #5EAAE5;
+    --sky-blue: #B8E4FF;
+    
+    /* Secondary Colors - More Vibrant */
+    --sunshine-yellow: #FFD166;
+    --sunset-orange: #FF8E6E;
+    --cloud-gray: #D9E3EA;
+    
+    /* Weather Condition Colors - Enhanced */
+    --storm-blue: #4A6FA5;
+    --rain-blue: #85B9D3;
+    --snow-white: #F0F4F7;
+    --sunny-yellow: #FFBE3D;
+    --cloudy-gray: #A9B5C1;
+    
+    /* Neutrals */
+    --neutral-white: #FFFFFF;
+    --light-gray: #F5F5F3;
+    --medium-gray: #D3D3D3;
+    --dark-gray: #565656;
+    --neutral-black: #1C1C1C;
+    
+    /* Card and UI Components */
+    --card: #FFFFFF;
+    --card-foreground: #1C1C1C;
+    --card-border: rgba(0, 0, 0, 0.05);
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.07);
+    --popover: #FFFFFF;
+    --popover-foreground: #1C1C1C;
+    --primary: #5EAAE5;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F5F5F3;
+    --secondary-foreground: #1C1C1C;
+    --muted: #F5F5F3;
+    --muted-foreground: #565656;
+    --accent: #FFD166;
+    --accent-foreground: #1C1C1C;
+    --destructive: #FF453A;
+    --border: #EAECEE;
+    --input: #F5F5F3;
+    --ring: #5EAAE5;
+    
+    /* Chart Colors */
+    --chart-1: #5EAAE5;
+    --chart-2: #FFD166;
+    --chart-3: #FF8E6E;
+    --chart-4: #4A6FA5;
+    --chart-5: #85B9D3;
+    
+    /* Sidebar */
+    --sidebar: #2C3741;
+    --sidebar-foreground: #FFFFFF;
+    --sidebar-primary: #5EAAE5;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #FFD166;
+    --sidebar-accent-foreground: #1C1C1C;
+    --sidebar-border: #3A4754;
+    --sidebar-ring: #5EAAE5;
+  }
+
+  .dark {
+    --background: #121214;
+    --foreground: #FFFFFF;
+    
+    /* Dark mode card and components */
+    --card: #1E2128;
+    --card-foreground: #FFFFFF;
+    --card-border: rgba(255, 255, 255, 0.05);
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+    --popover: #1E2128;
+    --popover-foreground: #FFFFFF;
+    --primary: #5EAAE5;
+    --primary-foreground: #FFFFFF;
+    --secondary: #2A2D37;
+    --secondary-foreground: #FFFFFF;
+    --muted: #2A2D37;
+    --muted-foreground: #BDBDBD;
+    --accent: #FFD166;
+    --accent-foreground: #1C1C1C;
+    --destructive: #FF453A;
+    --border: rgba(255, 255, 255, 0.1);
+    --input: rgba(255, 255, 255, 0.05);
+    --ring: #5EAAE5;
+    
+    /* Chart Colors - Adjusted for dark mode */
+    --chart-1: #5EAAE5;
+    --chart-2: #FFD166;
+    --chart-3: #FF8E6E;
+    --chart-4: #6B9CE0;
+    --chart-5: #85B9D3;
+  }
+
+  * {
+    @apply border-medium-gray outline-none;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-poppins);
+  }
+  
+  .font-poppins {
+    font-family: var(--font-poppins);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* CSS Variables for Design System */
+:root {
+  --font-sans: var(--font-poppins);
+  
+  /* Spacing Variables */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-s: 16px;
+  --space-m: 24px;
+  --space-l: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  
+  /* Border Radius Variables */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  
+  /* Shadow Variables */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+@layer components {
+  /* Modern Card Styles */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-md rounded-lg;
+  }
+  
+  .weather-card {
+    @apply bg-white rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-lg border border-card-border;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .weather-card:hover {
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-3px);
+  }
+  
+  .feature-icon-container {
+    @apply w-16 h-16 rounded-full flex items-center justify-center mb-4;
+    background: var(--gradient-cool);
+  }
+  
+  /* Modern Button Styles */
+  .primary-button {
+    @apply inline-flex items-center justify-center h-12 px-6 font-medium text-white rounded-full transition-all duration-300 hover:translate-y-[-2px] shadow-md;
+    background: var(--gradient-blue);
+  }
+  
+  .secondary-button {
+    @apply inline-flex items-center justify-center h-12 px-6 font-medium bg-white border border-light-blue text-light-blue rounded-full transition-all duration-300 hover:bg-sky-blue/5 hover:translate-y-[-2px] shadow-sm;
+  }
+  
+  /* Dashboard UI Elements */
+  .stat-card {
+    @apply relative overflow-hidden rounded-xl p-6 flex flex-col;
+    background: var(--gradient-cool);
+  }
+  
+  .temperature-display {
+    @apply text-6xl font-bold;
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Layout Elements */
+  .curved-section {
+    @apply relative py-16;
+    clip-path: ellipse(100% 55% at 50% 40%);
+  }
+  
+  /* Other Utility Classes */
+  .text-gradient-warm {
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-cool {
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
