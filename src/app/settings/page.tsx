@@ -7,65 +7,79 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function SettingsPage() {
-  const [units, setUnits] = useState("metric");
-  const [defaultLocation, setDefaultLocation] = useState("");
+  // Theme state
+  const [theme, setTheme] = useState('system'); // light, dark, system
+  
+  // Temperature unit state
+  const [tempUnit, setTempUnit] = useState('celsius');
+  
+  // Default Location
+  const [defaultLocation, setDefaultLocation] = useState('');
+  
+  // Notification preferences
   const [notifications, setNotifications] = useState(true);
-  const [theme, setTheme] = useState("system");
+  
+  // Save state
   const [saved, setSaved] = useState(false);
-
+  
   const handleSave = () => {
     // Logic to save settings would go here
     setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    
+    setTimeout(() => {
+      setSaved(false);
+    }, 2000);
   };
 
   return (
-    <div className="py-8 px-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Settings</h1>
-
-      <div className="space-y-6 max-w-3xl">
-        {/* Units Preferences */}
+    <div className="container mx-auto py-8 px-4 max-w-3xl">
+      <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Settings</h1>
+      
+      <div className="space-y-6">
+        {/* Units Settings */}
         <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Unit Preferences</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Units</h2>
           <div className="space-y-4">
-            <div className="flex items-center space-x-4">
-              <button
-                className={`px-4 py-2 rounded-md ${
-                  units === "metric" 
-                    ? "bg-blue-600 text-white" 
-                    : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                }`}
-                onClick={() => setUnits("metric")}
-              >
-                Metric (°C, km/h)
-              </button>
-              <button
-                className={`px-4 py-2 rounded-md ${
-                  units === "imperial" 
-                    ? "bg-blue-600 text-white" 
-                    : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                }`}
-                onClick={() => setUnits("imperial")}
-              >
-                Imperial (°F, mph)
-              </button>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Temperature</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  className={`flex items-center justify-center px-4 py-2 rounded-md ${
+                    tempUnit === "celsius" 
+                      ? "bg-blue-600 text-white" 
+                      : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                  }`}
+                  onClick={() => setTempUnit("celsius")}
+                >
+                  Celsius (°C)
+                </button>
+                <button
+                  className={`flex items-center justify-center px-4 py-2 rounded-md ${
+                    tempUnit === "fahrenheit" 
+                      ? "bg-blue-600 text-white" 
+                      : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                  }`}
+                  onClick={() => setTempUnit("fahrenheit")}
+                >
+                  Fahrenheit (°F)
+                </button>
+              </div>
             </div>
           </div>
         </Card>
-
+        
         {/* Location Settings */}
         <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Location Settings</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Default Location</h2>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="default-location">Default Location</Label>
-              <Input
-                id="default-location"
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Location</label>
+              <input
                 type="text"
-                placeholder="Enter city name"
+                className="px-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                placeholder="Enter city or zip code"
                 value={defaultLocation}
                 onChange={(e) => setDefaultLocation(e.target.value)}
-                className="mt-1 w-full dark:bg-gray-800"
               />
             </div>
             <Button 
@@ -73,11 +87,11 @@ export default function SettingsPage() {
               onClick={() => {
                 // Logic to use current location would go here
                 navigator.geolocation?.getCurrentPosition(
-                  position => {
+                  () => {
                     // In a real app, we'd convert coordinates to a city name
                     setDefaultLocation("Current Location");
                   },
-                  error => {
+                  () => {
                     alert("Unable to access your location. Please enter manually.");
                   }
                 );

@@ -2,7 +2,6 @@
 
 import React, { useState, ReactNode } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 // Icons
 import { RiDashboardLine, RiMapPinLine, RiCalendarLine, RiHistoryLine, RiAlertLine, RiSettings4Line, RiLogoutBoxLine } from 'react-icons/ri';
@@ -12,18 +11,6 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const toggleProfileMenu = () => {
-    setIsProfileMenuOpen(!isProfileMenuOpen);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex">
       {/* Sidebar */}

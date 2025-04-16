@@ -1,17 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  currentWeather, 
-  hourlyForecast, 
-  dailyForecast, 
-  weatherAlerts,
-  weatherInsights
-} from '@/mocks/weather-data';
-
-// Chhattisgarh data
 import { 
   chhattisgarh_cities, 
   DEFAULT_CITY_ID, 
@@ -21,13 +11,6 @@ import {
 } from '@/mocks/chhattisgarh-data';
 
 // Components
-import WeatherCard from '@/components/dashboard/WeatherCard';
-import HourlyForecast from '@/components/dashboard/HourlyForecast';
-import DailyForecast from '@/components/dashboard/DailyForecast';
-import WeatherMap from '@/components/dashboard/WeatherMap';
-import WeatherAlerts from '@/components/dashboard/WeatherAlerts';
-import WeatherInsights from '@/components/dashboard/WeatherInsights';
-import WeatherDetailsCard from '@/components/dashboard/WeatherDetailsCard';
 import LocationFilter from '@/components/dashboard/LocationFilter';
 
 export default function DashboardPage() {

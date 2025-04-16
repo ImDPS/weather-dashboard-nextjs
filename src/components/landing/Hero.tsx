@@ -94,7 +94,7 @@ const Hero = () => {
           
           <div className="mt-6 p-4 bg-light-gray/50 rounded-lg">
             <div className="flex justify-between items-center mb-2">
-              <h4 className="text-sm font-medium text-dark-gray">Today's Forecast</h4>
+              <h4 className="text-sm font-medium text-dark-gray">Today&apos;s Forecast</h4>
             </div>
             <div className="flex justify-between text-center">
               {["9AM", "12PM", "3PM", "6PM", "9PM"].map((time, i) => (

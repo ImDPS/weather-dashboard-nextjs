@@ -46,7 +46,7 @@ const Testimonials = () => {
                 <p className="text-small text-dark-gray">{testimonial.role}</p>
               </div>
             </div>
-            <p className="text-body text-dark-gray italic">"{testimonial.quote}"</p>
+            <p className="text-body text-dark-gray italic">&quot;{testimonial.quote}&quot;</p>
             <div className="mt-4 flex">
               {[...Array(5)].map((_, i) => (
                 <svg 
