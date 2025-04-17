@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { 
   WiDaySunny, 
   WiRain, 
@@ -13,7 +12,7 @@ import {
   WiHumidity,
   WiStrongWind
 } from 'react-icons/wi';
-import { FaExpand, FaTimes, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaExpand, FaTimes } from 'react-icons/fa';
 import { CITY_COORDINATES } from '../../data/MapCoordinates';
 
 interface CityType {
@@ -198,6 +197,21 @@ const WeatherMap: React.FC<WeatherMapProps> = ({
               All India
             </button>
           </div>
+        )}
+        
+        {/* Small toggle button for non-fullscreen view */}
+        {!fullScreen && (
+          <button
+            onClick={toggleMapMode}
+            className="absolute bottom-4 left-16 z-40 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-md border border-gray-100 dark:border-gray-700 text-light-blue hover:bg-white hover:text-light-blue/80 transition-colors"
+            title={mapMode === 'chhattisgarh' ? 'View All India' : 'View Chhattisgarh'}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </button>
         )}
         
         {/* Map grid lines */}
