@@ -258,12 +258,179 @@ export const chhattisgarh_cities = [
   }
 ];
 
+// Major Indian Cities
+export const major_indian_cities = [
+  {
+    id: 101,
+    name: "Delhi",
+    district: "Delhi",
+    currentWeather: {
+      temperature: 38,
+      feelsLike: 42,
+      humidity: 35,
+      wind: { speed: 18, direction: "NW" },
+      chanceOfRain: 2,
+      pressure: 1009,
+      condition: "Sunny",
+      airQuality: 145
+    },
+    hourlyForecast: [
+      { time: "09:00", temperature: 36, condition: "Sunny" },
+      { time: "12:00", temperature: 39, condition: "Sunny" },
+      { time: "15:00", temperature: 41, condition: "Sunny" },
+      { time: "18:00", temperature: 38, condition: "Clear" },
+      { time: "21:00", temperature: 34, condition: "Clear" }
+    ],
+    dailyForecast: [
+      { day: "Today", high: 41, low: 32, condition: "Sunny", chanceOfRain: 2 },
+      { day: "Tomorrow", high: 40, low: 31, condition: "Sunny", chanceOfRain: 5 },
+      { day: "Wed", high: 39, low: 31, condition: "Partly Cloudy", chanceOfRain: 10 },
+      { day: "Thu", high: 38, low: 30, condition: "Partly Cloudy", chanceOfRain: 15 },
+      { day: "Fri", high: 39, low: 30, condition: "Sunny", chanceOfRain: 5 },
+      { day: "Sat", high: 40, low: 31, condition: "Sunny", chanceOfRain: 3 },
+      { day: "Sun", high: 41, low: 32, condition: "Sunny", chanceOfRain: 2 }
+    ],
+    pollution: { aqi: 145, pm25: 42.3, pm10: 78.6, o3: 95.4, no2: 35.7 }
+  },
+  {
+    id: 102,
+    name: "Mumbai",
+    district: "Mumbai",
+    currentWeather: {
+      temperature: 32,
+      feelsLike: 36,
+      humidity: 76,
+      wind: { speed: 14, direction: "SW" },
+      chanceOfRain: 40,
+      pressure: 1004,
+      condition: "Partly Cloudy",
+      airQuality: 105
+    },
+    hourlyForecast: [
+      { time: "09:00", temperature: 30, condition: "Partly Cloudy" },
+      { time: "12:00", temperature: 32, condition: "Cloudy" },
+      { time: "15:00", temperature: 33, condition: "Rainy" },
+      { time: "18:00", temperature: 31, condition: "Rainy" },
+      { time: "21:00", temperature: 29, condition: "Cloudy" }
+    ],
+    dailyForecast: [
+      { day: "Today", high: 33, low: 27, condition: "Partly Cloudy", chanceOfRain: 40 },
+      { day: "Tomorrow", high: 32, low: 27, condition: "Rainy", chanceOfRain: 70 },
+      { day: "Wed", high: 31, low: 26, condition: "Rainy", chanceOfRain: 85 },
+      { day: "Thu", high: 30, low: 26, condition: "Rainy", chanceOfRain: 90 },
+      { day: "Fri", high: 31, low: 27, condition: "Cloudy", chanceOfRain: 60 },
+      { day: "Sat", high: 32, low: 27, condition: "Partly Cloudy", chanceOfRain: 30 },
+      { day: "Sun", high: 33, low: 28, condition: "Partly Cloudy", chanceOfRain: 20 }
+    ],
+    pollution: { aqi: 105, pm25: 28.6, pm10: 48.3, o3: 65.2, no2: 24.5 }
+  },
+  {
+    id: 103,
+    name: "Kolkata",
+    district: "Kolkata",
+    currentWeather: {
+      temperature: 33,
+      feelsLike: 38,
+      humidity: 80,
+      wind: { speed: 8, direction: "SE" },
+      chanceOfRain: 35,
+      pressure: 1002,
+      condition: "Cloudy",
+      airQuality: 120
+    },
+    hourlyForecast: [
+      { time: "09:00", temperature: 31, condition: "Cloudy" },
+      { time: "12:00", temperature: 33, condition: "Cloudy" },
+      { time: "15:00", temperature: 34, condition: "Rainy" },
+      { time: "18:00", temperature: 32, condition: "Rainy" },
+      { time: "21:00", temperature: 30, condition: "Cloudy" }
+    ],
+    dailyForecast: [
+      { day: "Today", high: 34, low: 28, condition: "Cloudy", chanceOfRain: 35 },
+      { day: "Tomorrow", high: 33, low: 28, condition: "Rainy", chanceOfRain: 65 },
+      { day: "Wed", high: 32, low: 27, condition: "Rainy", chanceOfRain: 80 },
+      { day: "Thu", high: 31, low: 26, condition: "Cloudy", chanceOfRain: 45 },
+      { day: "Fri", high: 32, low: 27, condition: "Partly Cloudy", chanceOfRain: 25 },
+      { day: "Sat", high: 33, low: 28, condition: "Partly Cloudy", chanceOfRain: 15 },
+      { day: "Sun", high: 34, low: 29, condition: "Partly Cloudy", chanceOfRain: 10 }
+    ],
+    pollution: { aqi: 120, pm25: 35.2, pm10: 60.7, o3: 75.3, no2: 28.9 }
+  },
+  {
+    id: 104,
+    name: "Bangalore",
+    district: "Bangalore",
+    currentWeather: {
+      temperature: 28,
+      feelsLike: 30,
+      humidity: 65,
+      wind: { speed: 12, direction: "W" },
+      chanceOfRain: 20,
+      pressure: 1010,
+      condition: "Partly Cloudy",
+      airQuality: 95
+    },
+    hourlyForecast: [
+      { time: "09:00", temperature: 26, condition: "Partly Cloudy" },
+      { time: "12:00", temperature: 28, condition: "Partly Cloudy" },
+      { time: "15:00", temperature: 29, condition: "Cloudy" },
+      { time: "18:00", temperature: 27, condition: "Partly Cloudy" },
+      { time: "21:00", temperature: 25, condition: "Clear" }
+    ],
+    dailyForecast: [
+      { day: "Today", high: 29, low: 22, condition: "Partly Cloudy", chanceOfRain: 20 },
+      { day: "Tomorrow", high: 28, low: 21, condition: "Partly Cloudy", chanceOfRain: 25 },
+      { day: "Wed", high: 27, low: 21, condition: "Cloudy", chanceOfRain: 45 },
+      { day: "Thu", high: 26, low: 20, condition: "Rainy", chanceOfRain: 70 },
+      { day: "Fri", high: 27, low: 21, condition: "Cloudy", chanceOfRain: 40 },
+      { day: "Sat", high: 28, low: 22, condition: "Partly Cloudy", chanceOfRain: 25 },
+      { day: "Sun", high: 29, low: 22, condition: "Sunny", chanceOfRain: 10 }
+    ],
+    pollution: { aqi: 95, pm25: 22.4, pm10: 42.8, o3: 58.3, no2: 19.7 }
+  },
+  {
+    id: 105,
+    name: "Hyderabad",
+    district: "Hyderabad",
+    currentWeather: {
+      temperature: 31,
+      feelsLike: 34,
+      humidity: 60,
+      wind: { speed: 10, direction: "SW" },
+      chanceOfRain: 15,
+      pressure: 1008,
+      condition: "Sunny",
+      airQuality: 110
+    },
+    hourlyForecast: [
+      { time: "09:00", temperature: 29, condition: "Sunny" },
+      { time: "12:00", temperature: 31, condition: "Sunny" },
+      { time: "15:00", temperature: 32, condition: "Partly Cloudy" },
+      { time: "18:00", temperature: 30, condition: "Partly Cloudy" },
+      { time: "21:00", temperature: 28, condition: "Clear" }
+    ],
+    dailyForecast: [
+      { day: "Today", high: 32, low: 25, condition: "Sunny", chanceOfRain: 15 },
+      { day: "Tomorrow", high: 32, low: 24, condition: "Partly Cloudy", chanceOfRain: 20 },
+      { day: "Wed", high: 31, low: 24, condition: "Partly Cloudy", chanceOfRain: 30 },
+      { day: "Thu", high: 30, low: 23, condition: "Cloudy", chanceOfRain: 45 },
+      { day: "Fri", high: 29, low: 23, condition: "Rainy", chanceOfRain: 60 },
+      { day: "Sat", high: 30, low: 24, condition: "Partly Cloudy", chanceOfRain: 35 },
+      { day: "Sun", high: 31, low: 25, condition: "Sunny", chanceOfRain: 15 }
+    ],
+    pollution: { aqi: 110, pm25: 30.5, pm10: 52.4, o3: 68.1, no2: 25.3 }
+  }
+];
+
+// Combined cities for the filter
+export const all_cities = [...chhattisgarh_cities, ...major_indian_cities];
+
 // Default selected city (Raipur)
 export const DEFAULT_CITY_ID = 1;
 
 // Get city by ID
 export const getCityById = (id: number) => {
-  return chhattisgarh_cities.find(city => city.id === id) || chhattisgarh_cities[0];
+  return all_cities.find(city => city.id === id) || all_cities[0];
 };
 
 // Weather alerts for Chhattisgarh
