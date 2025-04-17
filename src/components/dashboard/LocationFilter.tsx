@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { chhattisgarh_cities } from '@/mocks/chhattisgarh-data';
+import { all_cities, chhattisgarh_cities, major_indian_cities } from '@/mocks/chhattisgarh-data';
 
 interface LocationFilterProps {
   selectedCityId: number;
@@ -13,15 +13,15 @@ const LocationFilter: React.FC<LocationFilterProps> = ({ selectedCityId, onCityC
   const [searchTerm, setSearchTerm] = useState('');
   
   // Get the currently selected city
-  const selectedCity = chhattisgarh_cities.find(city => city.id === selectedCityId) || chhattisgarh_cities[0];
+  const selectedCity = all_cities.find(city => city.id === selectedCityId) || all_cities[0];
   
   // Filter cities based on search term
   const filteredCities = searchTerm 
-    ? chhattisgarh_cities.filter(city => 
+    ? all_cities.filter(city => 
         city.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
         city.district.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    : chhattisgarh_cities;
+    : all_cities;
   
   // Close the dropdown if clicked outside
   useEffect(() => {
@@ -42,6 +42,19 @@ const LocationFilter: React.FC<LocationFilterProps> = ({ selectedCityId, onCityC
     onCityChange(cityId);
     setIsOpen(false);
     setSearchTerm('');
+  };
+  
+  // Group cities by category for display
+  const getMajorIndianCities = () => {
+    return searchTerm 
+      ? filteredCities.filter(city => major_indian_cities.some(majorCity => majorCity.id === city.id))
+      : major_indian_cities;
+  };
+  
+  const getChhatisgarhCities = () => {
+    return searchTerm 
+      ? filteredCities.filter(city => chhattisgarh_cities.some(chgCity => chgCity.id === city.id))
+      : chhattisgarh_cities;
   };
   
   return (
@@ -86,34 +99,81 @@ const LocationFilter: React.FC<LocationFilterProps> = ({ selectedCityId, onCityC
           {/* Cities list */}
           <div className="max-h-60 overflow-y-auto scrollbar-hide p-1">
             {filteredCities.length > 0 ? (
-              filteredCities.map(city => (
-                <button
-                  key={city.id}
-                  className={`flex items-center justify-between w-full px-3 py-2 text-left text-sm rounded-md ${
-                    city.id === selectedCityId 
-                      ? 'bg-light-blue/10 text-light-blue' 
-                      : 'text-dark-blue dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}
-                  onClick={() => handleCitySelect(city.id)}
-                >
-                  <div className="flex items-center">
-                    <span className="font-medium">{city.name}</span>
-                    <span className="ml-2 text-xs text-dark-gray dark:text-gray-400">{city.district}</span>
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <span className="text-xs text-dark-gray dark:text-gray-400 mr-1">
-                      {city.currentWeather.temperature}°C
-                    </span>
-                    <div className={`w-2 h-2 rounded-full ${
-                      city.currentWeather.condition.toLowerCase().includes('sunny') ? 'bg-sunshine-yellow' :
-                      city.currentWeather.condition.toLowerCase().includes('cloud') ? 'bg-cloudy-gray' :
-                      city.currentWeather.condition.toLowerCase().includes('rain') ? 'bg-rain-blue' :
-                      'bg-light-blue'
-                    }`}></div>
-                  </div>
-                </button>
-              ))
+              <>
+                {/* Major Indian Cities */}
+                {getMajorIndianCities().length > 0 && (
+                  <>
+                    <div className="px-3 py-1 text-xs text-dark-gray dark:text-gray-400 font-semibold uppercase">
+                      Major Indian Cities
+                    </div>
+                    {getMajorIndianCities().map(city => (
+                      <button
+                        key={city.id}
+                        className={`flex items-center justify-between w-full px-3 py-2 text-left text-sm rounded-md transition-colors duration-200 ${
+                          city.id === selectedCityId 
+                            ? 'bg-light-blue/10 text-light-blue' 
+                            : 'text-dark-blue dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                        }`}
+                        onClick={() => handleCitySelect(city.id)}
+                      >
+                        <div className="flex items-center">
+                          <span className="font-medium">{city.name}</span>
+                          <span className="ml-2 text-xs text-dark-gray dark:text-gray-400">{city.district}</span>
+                        </div>
+                        
+                        <div className="flex items-center">
+                          <span className="text-xs text-dark-gray dark:text-gray-400 mr-1">
+                            {city.currentWeather.temperature}°C
+                          </span>
+                          <div className={`w-2 h-2 rounded-full ${
+                            city.currentWeather.condition.toLowerCase().includes('sunny') ? 'bg-sunshine-yellow' :
+                            city.currentWeather.condition.toLowerCase().includes('cloud') ? 'bg-cloudy-gray' :
+                            city.currentWeather.condition.toLowerCase().includes('rain') ? 'bg-rain-blue' :
+                            'bg-light-blue'
+                          }`}></div>
+                        </div>
+                      </button>
+                    ))}
+                  </>
+                )}
+                
+                {/* Chhattisgarh Cities */}
+                {getChhatisgarhCities().length > 0 && (
+                  <>
+                    <div className="px-3 py-1 mt-2 text-xs text-dark-gray dark:text-gray-400 font-semibold uppercase">
+                      Chhattisgarh Cities
+                    </div>
+                    {getChhatisgarhCities().map(city => (
+                      <button
+                        key={city.id}
+                        className={`flex items-center justify-between w-full px-3 py-2 text-left text-sm rounded-md transition-colors duration-200 ${
+                          city.id === selectedCityId 
+                            ? 'bg-light-blue/10 text-light-blue' 
+                            : 'text-dark-blue dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                        }`}
+                        onClick={() => handleCitySelect(city.id)}
+                      >
+                        <div className="flex items-center">
+                          <span className="font-medium">{city.name}</span>
+                          <span className="ml-2 text-xs text-dark-gray dark:text-gray-400">{city.district}</span>
+                        </div>
+                        
+                        <div className="flex items-center">
+                          <span className="text-xs text-dark-gray dark:text-gray-400 mr-1">
+                            {city.currentWeather.temperature}°C
+                          </span>
+                          <div className={`w-2 h-2 rounded-full ${
+                            city.currentWeather.condition.toLowerCase().includes('sunny') ? 'bg-sunshine-yellow' :
+                            city.currentWeather.condition.toLowerCase().includes('cloud') ? 'bg-cloudy-gray' :
+                            city.currentWeather.condition.toLowerCase().includes('rain') ? 'bg-rain-blue' :
+                            'bg-light-blue'
+                          }`}></div>
+                        </div>
+                      </button>
+                    ))}
+                  </>
+                )}
+              </>
             ) : (
               <div className="px-3 py-2 text-sm text-dark-gray dark:text-gray-400 text-center">
                 No cities found

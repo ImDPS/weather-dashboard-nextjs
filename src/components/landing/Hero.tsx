@@ -55,7 +55,7 @@ const Hero = () => {
         <div className="glass-card p-8 relative z-10 max-w-md mx-auto transform transition-transform hover:scale-105 duration-500">
           <div className="bg-dark-blue text-white p-4 rounded-lg flex items-center justify-between mb-4">
             <h3 className="font-medium">Current Weather</h3>
-            <span className="text-sm text-sky-blue">Toronto, CA</span>
+            <span className="text-sm text-sky-blue">Raipur, CG</span>
           </div>
           
           <div className="p-4 flex items-center justify-between">

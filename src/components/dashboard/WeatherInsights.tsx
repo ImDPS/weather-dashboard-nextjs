@@ -1,101 +1,132 @@
-import React from 'react';
-import type { WeatherInsight } from '@/types/weather';
+"use client";
 
-interface WeatherInsightsProps {
-  insights: WeatherInsight[];
+import React, { useState } from 'react';
+import { 
+  WiDaySunny, 
+  WiUmbrella, 
+  WiStrongWind, 
+  WiThermometer, 
+  WiDayCloudyGusts
+} from 'react-icons/wi';
+
+interface InsightType {
+  type: string;
+  description: string;
 }
 
-const WeatherInsights: React.FC<WeatherInsightsProps> = ({ insights }) => {
-  // Helper function to get insight icon based on type
-  const getInsightIcon = (type: string): React.ReactNode => {
-    if (type.toLowerCase().includes('summary')) {
-      return (
-        <svg className="w-5 h-5 text-light-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      );
+interface WeatherInsightsProps {
+  insights: InsightType[];
+  isLoading: boolean;
+  className?: string;
+}
+
+const WeatherInsights: React.FC<WeatherInsightsProps> = ({ 
+  insights, 
+  isLoading,
+  className = '' 
+}) => {
+  const [expandedInsight, setExpandedInsight] = useState<number | null>(null);
+
+  // Get icon based on insight type
+  const getInsightIcon = (type: string) => {
+    const typeLower = type.toLowerCase();
+    if (typeLower.includes('summary')) {
+      return <WiDaySunny className="w-6 h-6" />;
+    } else if (typeLower.includes('clothing')) {
+      return <WiThermometer className="w-6 h-6" />;
+    } else if (typeLower.includes('activity')) {
+      return <WiUmbrella className="w-6 h-6" />;
+    } else if (typeLower.includes('travel')) {
+      return <WiStrongWind className="w-6 h-6" />;
+    } else {
+      return <WiDayCloudyGusts className="w-6 h-6" />;
     }
-    
-    if (type.toLowerCase().includes('clothing')) {
-      return (
-        <svg className="w-5 h-5 text-sunshine-yellow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-        </svg>
-      );
-    }
-    
-    if (type.toLowerCase().includes('activity')) {
-      return (
-        <svg className="w-5 h-5 text-sunset-orange" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      );
-    }
-    
-    if (type.toLowerCase().includes('energy')) {
-      return (
-        <svg className="w-5 h-5 text-storm-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      );
-    }
-    
-    return (
-      <svg className="w-5 h-5 text-light-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    );
   };
-  
-  // Helper function to get insight background color based on type
-  const getInsightGradient = (type: string): string => {
-    if (type.toLowerCase().includes('summary')) {
-      return 'from-light-blue/10 to-white dark:from-light-blue/10 dark:to-gray-800';
+
+  // Handle card click
+  const toggleInsight = (index: number) => {
+    if (expandedInsight === index) {
+      setExpandedInsight(null);
+    } else {
+      setExpandedInsight(index);
     }
-    
-    if (type.toLowerCase().includes('clothing')) {
-      return 'from-sunshine-yellow/10 to-white dark:from-sunshine-yellow/10 dark:to-gray-800';
-    }
-    
-    if (type.toLowerCase().includes('activity')) {
-      return 'from-sunset-orange/10 to-white dark:from-sunset-orange/10 dark:to-gray-800';
-    }
-    
-    if (type.toLowerCase().includes('energy')) {
-      return 'from-storm-blue/10 to-white dark:from-storm-blue/10 dark:to-gray-800';
-    }
-    
-    return 'from-light-blue/10 to-white dark:from-light-blue/10 dark:to-gray-800';
   };
 
   return (
-    <div className="space-y-4">
-      {insights.map(insight => (
-        <div 
-          key={insight.id} 
-          className={`bg-gradient-to-br ${getInsightGradient(insight.type)} rounded-lg p-4 shadow-sm transition-all duration-300 hover:shadow-md`}
-        >
-          <div className="flex items-start space-x-3">
-            <div className="mt-0.5">
-              {getInsightIcon(insight.type)}
-            </div>
-            <div>
-              <h3 className="font-medium text-dark-blue dark:text-white">{insight.type}</h3>
-              <p className="text-dark-gray dark:text-gray-300 text-sm mt-1">{insight.description}</p>
-            </div>
-          </div>
-        </div>
-      ))}
+    <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-6 ${className} transition-all duration-300 hover:shadow-lg`}>
+      <h2 className="text-lg font-semibold text-dark-blue dark:text-white mb-6 animate-fade-in">Weather Insights</h2>
       
-      <div className="flex items-center justify-center pt-2">
-        <button className="text-light-blue text-sm hover:underline focus:outline-none flex items-center">
-          <svg className="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
-          Refresh Insights
-        </button>
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="animate-pulse">
+              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-2"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {insights.map((insight, index) => (
+            <div 
+              key={index} 
+              className={`flex bg-gray-50 dark:bg-gray-700/30 rounded-xl p-3 transition-all duration-300 cursor-pointer animate-fade-in hover:shadow-md ${
+                expandedInsight === index ? 'ring-2 ring-light-blue shadow-md' : 'hover:bg-light-blue/5 dark:hover:bg-light-blue/10'
+              }`} 
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => toggleInsight(index)}
+            >
+              <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center mr-3 transition-all duration-300 ${
+                insight.type.toLowerCase().includes('summary') ? 'bg-light-blue/10 text-light-blue' :
+                insight.type.toLowerCase().includes('clothing') ? 'bg-sunshine-yellow/10 text-sunshine-yellow' :
+                insight.type.toLowerCase().includes('activity') ? 'bg-sunset-orange/10 text-sunset-orange' :
+                'bg-storm-blue/10 text-storm-blue'
+              } ${expandedInsight === index ? 'scale-110' : ''}`}>
+                {getInsightIcon(insight.type)}
+              </div>
+              <div className="flex-1">
+                <h3 className={`text-sm font-medium text-dark-blue dark:text-white transition-all duration-200 ${expandedInsight === index ? 'text-light-blue' : ''}`}>
+                  {insight.type}
+                </h3>
+                <p className={`text-sm text-dark-gray dark:text-gray-400 mt-1 transition-all duration-300 ${
+                  expandedInsight === index ? 'max-h-32' : 'line-clamp-2'
+                }`}>
+                  {insight.description}
+                </p>
+                {expandedInsight === index && (
+                  <button 
+                    className="mt-2 text-xs text-light-blue hover:text-sky-blue transition-colors duration-200 animate-fade-in flex items-center"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandedInsight(null);
+                    }}
+                  >
+                    Read less
+                    <svg className="w-3 h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                    </svg>
+                  </button>
+                )}
+                {expandedInsight !== index && insight.description.length > 120 && (
+                  <button 
+                    className="mt-1 text-xs text-light-blue hover:text-sky-blue transition-colors duration-200 flex items-center"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandedInsight(index);
+                    }}
+                  >
+                    Read more
+                    <svg className="w-3 h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
